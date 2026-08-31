@@ -1,0 +1,9 @@
+backend/data/
+*.csv
+.venv/
+venv/
+__pycache__/
+*.db
+*.pkl
+frontend.zip
+node_modules/
