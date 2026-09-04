@@ -185,21 +185,25 @@ npm run dev</code></pre>
 
 <hr />
 
-<h2>🎯 Conclusion & Roadmap</h2>
+<h2>🎯 Key Takeaways & What I Learned</h2>
 <p>
-  <strong>Phishing Detector</strong> validates that lightweight vectorizers coupled with optimized gradient boosting deliver high-throughput, low-latency threat analysis suitable for integration into mail gateways, browser extensions, and SIEM/SOAR alert ingestion pipelines.
+  Building <strong>Phishing Detector</strong> end-to-end provided hands-on experience bridging applied machine learning with practical cybersecurity engineering. Developing and evaluating both models highlighted critical real-world trade-offs:
 </p>
 
-<h4>Future Improvements:</h4>
 <ul>
-  <li>Incorporate active WHOIS lookups (domain age, registrar entropy) into the feature set.</li>
-  <li>Fine-tune a small transformer (such as DistilBERT) for comparison against TF-IDF on obfuscated emails.</li>
-  <li>Package backend and frontend services into containerized Docker images.</li>
+  <li>
+    <strong>Context Determines Classifier Performance:</strong> The email classifier achieved <strong>98.42% accuracy</strong> because natural language payloads provide dense semantic indicators (urgency cues, credential requests, authority manipulation). Conversely, static URL detection is constrained by short string lengths and adversarial obfuscation, reinforcing that textual heuristics and network infrastructure data serve complementary roles.
+  </li>
+  <li>
+    <strong>Handling Severe Real-World Imbalance:</strong> Evaluating the URL model on over <strong>109,000 samples</strong> required careful attention to class distribution and false-positive rates. In security operations, an aggressive model that triggers false alarms on benign domains causes alert fatigue, making precision just as critical as recall.
+  </li>
+  <li>
+    <strong>Inference Latency vs. Feature Depth:</strong> Relying purely on client-side and extracted string features keeps inference times under a few milliseconds. While external signals like live DNS queries or WHOIS lookups would boost detection rates, keeping the model lightweight allows it to function effectively as a rapid first-line filter.
+  </li>
+  <li>
+    <strong>Full-Stack Security Tooling:</strong> Designing the project reinforced how to connect machine learning pipelines (Flask, Scikit-Learn, XGBoost) to an asynchronous, analyst-friendly interface (React, Tailwind CSS) that delivers immediate visual risk telemetry.
+  </li>
 </ul>
 
-<hr />
-
-<h2>📄 License</h2>
-<p>
   This project is distributed under the <a href="LICENSE">MIT License</a>.
 </p>
